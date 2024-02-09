@@ -1,6 +1,5 @@
 package filter.entity;
 
-import filter.service.IFilterService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
