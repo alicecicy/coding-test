@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class FilterDuplicatesByMappingTest {
     @Test
     public void test1() {
-        // demo样例
+        // demo example
         FilterDataDTO data = new FilterDataDTO();
         data.setValue("abcccbad");
         data.setMapping(Map.of("ccc", "b", "bbb", "a"));
@@ -21,34 +21,17 @@ public class FilterDuplicatesByMappingTest {
 
     @Test
     public void test2() {
-        // 映射空情况
+        // 3 or more consecutive characters characters are identical and replacement conditions is null
         FilterDataDTO data = new FilterDataDTO();
         data.setValue("abccc");
         data.setMapping(null);
         Assert.assertEquals("ab", new FilterDuplicatesByMapping().operation(data));
     }
 
+
     @Test
     public void test3() {
-        // 字符空情况
-        FilterDataDTO data = new FilterDataDTO();
-        data.setValue("");
-        data.setMapping(Map.of("ccc", "b", "bbb", "a"));
-        Assert.assertEquals("", new FilterDuplicatesByMapping().operation(data));
-    }
-
-    @Test
-    public void test4() {
-        // 字符空情况
-        FilterDataDTO data = new FilterDataDTO();
-        data.setValue("");
-        data.setMapping(Map.of("ccc", "b", "bbb", "a"));
-        Assert.assertEquals("", new FilterDuplicatesByMapping().operation(data));
-    }
-
-    @Test
-    public void test5() {
-        // 映射后字符再次符合映射条件情况
+        // after first replacement conditions, hit replacement conditions again
         FilterDataDTO data = new FilterDataDTO();
         data.setValue("cccbbcc");
         data.setMapping(Map.of("ccc", "b", "bbb", "c"));

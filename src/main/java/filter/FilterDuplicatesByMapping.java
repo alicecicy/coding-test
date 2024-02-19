@@ -11,13 +11,18 @@ import java.util.Map;
  */
 public class FilterDuplicatesByMapping extends FilterAbstract<FilterDataDTO>{
 
+    /**
+     * input,
+     * @param data
+     * @return
+     */
     @Override
     public String dataHandling(FilterDataDTO data) {
         return filterDataByMapping(data);
     }
 
     /**
-     * 字符转换映射
+     * replace with designated value
      * @param data
      * @return
      */

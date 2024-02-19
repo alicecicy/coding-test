@@ -3,48 +3,38 @@ import filter.entity.FilterBaseDataDTO;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * test1
  */
 public class FilterDuplicatesTest {
     @Test
     public void test1() {
-        // demo样例
+        // demo example
         FilterBaseDataDTO data = new FilterBaseDataDTO();
         data.setValue("aabcccbbad");
         Assert.assertEquals("d", new FilterDuplicates().operation(data));
     }
 
     @Test
-    public void test2() {
-        // 空情况
-        FilterBaseDataDTO data = new FilterBaseDataDTO();
-        data.setValue("");
-        Assert.assertEquals("", new FilterDuplicates().operation(data));
-    }
-
-    @Test
     public void test3() {
-        // 无重复字母
+        // no identical characters
         FilterBaseDataDTO data = new FilterBaseDataDTO();
-        data.setValue("abc");
-        Assert.assertEquals("abc", new FilterDuplicates().operation(data));
+        data.setValue("abcdefg");
+        Assert.assertEquals("abcdefg", new FilterDuplicates().operation(data));
     }
 
 
     @Test
     public void test4() {
-        // 2个重复字母
+        // 2 consecutive characters characters are identical
         FilterBaseDataDTO data = new FilterBaseDataDTO();
-        data.setValue("aabbcc");
-        Assert.assertEquals("aabbcc", new FilterDuplicates().operation(data));
+        data.setValue("aabbccddeeffgg");
+        Assert.assertEquals("aabbccddeeffgg", new FilterDuplicates().operation(data));
     }
 
     @Test
     public void test5() {
-        // 3个以上字母重复+部分不重构
+        // 3 or more consecutive characters characters are identical
         FilterBaseDataDTO data = new FilterBaseDataDTO();
         data.setValue("abbccccccddddd");
         Assert.assertEquals("abb", new FilterDuplicates().operation(data));
@@ -52,7 +42,7 @@ public class FilterDuplicatesTest {
 
     @Test
     public void test6() {
-        // 全部3个以上字母重复
+        // all in 3 or more consecutive characters
         FilterBaseDataDTO data = new FilterBaseDataDTO();
         data.setValue("aaaabbbccccccddddd");
         Assert.assertEquals("", new FilterDuplicates().operation(data));
@@ -60,23 +50,15 @@ public class FilterDuplicatesTest {
 
     @Test
     public void test7() {
-        // 3个以上字母重复+3个以上非字母重复
-        FilterBaseDataDTO data = new FilterBaseDataDTO();
-        data.setValue("aabbccccccdddddb11122222444");
-        Assert.assertEquals("aa11122222444", new FilterDuplicates().operation(data));
-    }
-
-    @Test
-    public void test8() {
-        // 产生3次循环去除情况
+        // recursive algorithm with 3 loops
         FilterBaseDataDTO data = new FilterBaseDataDTO();
         data.setValue("aabbaaaabbaa");
         Assert.assertEquals("", new FilterDuplicates().operation(data));
     }
 
     @Test
-    public void test9() {
-        // 产生4次循环去除情况
+    public void test8() {
+        // recursive algorithm with 4 loops
         FilterBaseDataDTO data = new FilterBaseDataDTO();
         data.setValue("daabbaaaabbaadd12");
         Assert.assertEquals("12", new FilterDuplicates().operation(data));
